@@ -1,6 +1,5 @@
 @echo off
-set input=
-set /p input=ÇëÊäÈë×Ö·û´®:
+set /p input=ÇëÊäÈë×¢ÊÍ:
 
 git add .
 git commit -m %input%
