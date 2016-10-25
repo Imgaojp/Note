@@ -1,4 +1,4 @@
-# 1.1Java起源发展
+# 1.1 Java起源发展
 ### Java技术体系
 
 
@@ -9,5 +9,5 @@
 	- 集成API
 	- Java基本库
 	- JVM 
-- Java EE
+- Java ME
 - Java EE
