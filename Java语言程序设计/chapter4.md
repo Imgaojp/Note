@@ -1,4 +1,4 @@
- # Java面向对象特性
+# Java面向对象特性
 ## 概述
 ### Java的OOP特性
 - 封装（encapsulation）
