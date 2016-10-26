@@ -123,10 +123,10 @@ Java中所有的类都有构造方法，用来进行该类对象的初始化。�
 - 访问控制概述
 
 Java中，可以在类的定义中使用权限修饰符来保护类的变量和方法。Java支持如下四种不同的访问权限。
-	1. 私有的——以private修饰符指定。
-	2. 受保护的——以protected修饰符指定。
-	3. 公开的——以public修饰符指定。
-	4. 默认的，也称为default或package——不适用任何修饰符。
+	+ 私有的——以private修饰符指定。
+	+ 受保护的——以protected修饰符指定。
+	+ 公开的——以public修饰符指定。
+	+ 默认的，也称为default或package——不适用任何修饰符。
 
 对于类的成员变量和方法可以定义上述4种访问级别：public，protected，default，private，对于类（内部类）可以有public或default两种。
 - private
