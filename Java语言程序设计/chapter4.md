@@ -337,6 +337,26 @@ aObjectVariable instanceof SomeClass
 
 
 - clone()方法
-- equals()方法
-- toString()方法
-- getClass()方法
+利用Object方法可以将一个已有对象复制为另一个对象。利用下列语句实现对象的复制:
+```Java
+aCloneableObject.clone();
+```
+上述方法将创建一个与*aCloneableObject*相同类型的对象，并把该对象成员变量的值初始化为*aCloneableObject*中相应成员变量的值。<br>
+需要注意下列问题：
+	- 被调用*clone()*方法的对象*aCloneableObject*必须实现了*java.lang.Cloneable*接口，否则运行时将抛出*CloneNotSupportedException*异常。因为*Object*类本身并没有实现这个接口，所以提供复制能力的类必须自己实现*Cloneable*接口。
+	- *clone()*方法是*shallow copy*而不是*deep copy*。*shallow copy*——浅复制：指如果被复制对象的成员变量是一个引用类型变量(如是一个对象数组)，则复制对象中将不包括该变量指向的对象。*deep copy*——深复制：在上述情况下，将同时复制该变量指向的对象。
+- equals()方法<br>
+Object类的*public boolean equals(object obj)*方法，比较当前对象的引用是否与参数obj指向同一个对象。但String,Data,File类和所有包装类（Wrapper class，如Integer，Long等）都重写该方法，改为比较所指对象的内容。另外Java中的恒等运算符"=="对于引用型变量，比较的是两个变量所指对象的地址。
+- toString()方法<br>
+toString()方法返回对象的字符串表示，表达的内容因具体对象而异。该方法在调试时对确定对象的内部状态是很有价值的，为此一般在自己的类中重写该方法。例如：
+```Java
+System.out.println(Thread.currentThread().toString());
+```
+- getClass()方法<br>
+*getClass()*方法返回对象的类信息，该方法返回一个Class类型的对象。例如，下面的方法将获取对象的类名并显示：
+```Java
+void getClassName(Object obj){
+	System.out.println("The name of the object is" + obj.getClass().getName());
+}
+```
+Class类型常用于在运行时刻创建在编译时不知道类型的对象。
