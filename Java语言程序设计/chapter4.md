@@ -311,11 +311,14 @@ Java的多态性，突出的优点是使程序具有良好的可拓展性。当�
 aObjectVariable instanceof SomeClass
 ```
 - 强制类型转换
-<br>强制类型转换的格式如下：
-```Java
-(SomeClass)aObjectVariable
-```
-在进行对象类型的强制转换时，为了保证转换能够成功进行，一般先使用instanceof对对象的类型进行测试，当测试结果为true再进行转换。
+<br>
+强制类型转换的格式如下：
+
+
+	```Java
+	(SomeClass)aObjectVariable
+	```
+<br>在进行对象类型的强制转换时，为了保证转换能够成功进行，一般先使用instanceof对对象的类型进行测试，当测试结果为true再进行转换。
 <br>Java语言在执行强制类型转换时遵循以下规则：
 	- 对象变量转换的目标类型，一定要是当前对象类型的子类。这个规则由编译器进行检查。
 	- 在运行时刻也要进行对象类型的检查。例如某个进行对象类型转换的程序中，省略了instanceof测试，并且对象的类型并不是其要转换的目标类型，那么程序运行中将抛出异常。
@@ -336,7 +339,11 @@ aObjectVariable instanceof SomeClass
 		- *wait()*
 
 
-- clone()方法<br>利用Object方法可以将一个已有对象复制为另一个对象。利用下列语句实现对象的复制:
+- clone()方法<br>
+利用Object方法可以将一个已有对象复制为另一个对象。利用下列语句实现对象的复制:
+	```Java
+	aCloneableObject.clone();
+	```
 上述方法将创建一个与*aCloneableObject*相同类型的对象，并把该对象成员变量的值初始化为*aCloneableObject*中相应成员变量的值。<br>
 需要注意下列问题：
 	- 被调用*clone()*方法的对象*aCloneableObject*必须实现了*java.lang.Cloneable*接口，否则运行时将抛出*CloneNotSupportedException*异常。因为*Object*类本身并没有实现这个接口，所以提供复制能力的类必须自己实现*Cloneable*接口。
