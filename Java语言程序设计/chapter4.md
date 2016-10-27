@@ -336,7 +336,7 @@ aObjectVariable instanceof SomeClass
 		- *wait()*
 
 
-- clone()方法
+- clone()方法<br>
 利用Object方法可以将一个已有对象复制为另一个对象。利用下列语句实现对象的复制:
 ```Java
 aCloneableObject.clone();
