@@ -337,9 +337,7 @@ aObjectVariable instanceof SomeClass
 
 
 - clone()方法<br>利用Object方法可以将一个已有对象复制为另一个对象。利用下列语句实现对象的复制:
-```Java
-aCloneableObject.clone();
-```
+上述方法将创建一个与*aCloneableObject*相同类型的对象，并把该对象成员变量的值初始化为*aCloneableObject*中相应成员变量的值。<br>
 需要注意下列问题：
 	- 被调用*clone()*方法的对象*aCloneableObject*必须实现了*java.lang.Cloneable*接口，否则运行时将抛出*CloneNotSupportedException*异常。因为*Object*类本身并没有实现这个接口，所以提供复制能力的类必须自己实现*Cloneable*接口。
 	- *clone()*方法是*shallow copy*而不是*deep copy*。*shallow copy*——浅复制：指如果被复制对象的成员变量是一个引用类型变量(如是一个对象数组)，则复制对象中将不包括该变量指向的对象。*deep copy*——深复制：在上述情况下，将同时复制该变量指向的对象。
