@@ -24,3 +24,24 @@
 
 	[color]
 		ui = auto
+# 使用GitHub前的准备
+### 设置 SSH Key
+&nbsp;GitHub上连接已有仓库时的认证，是通过使用了SSH的公开密钥认证方式进行的。运行下面的命令创建SSH Key。
+
+	$ ssh-keygen -t rsa -C "your_email@example.com"
+	Generating public/private rsa key pair.
+	Enter file in which to save the key
+	(/Users/your_user_directory/.ssh/id_rsa):
+	Enter passphrase(empty for no passphrase):
+	Enter same passphrase again:
+&nbsp;&nbsp;"your_email@example.com"的部分请改成您在创建账户时用的邮箱地址。密码需要在认证时输入，请选择复杂度高并且容易记忆的组合。
+
+&nbsp;&nbsp;输入密码后会出现以下结果。
+
+	Your identification has been saved in /Users/your_user_directory/.ssh/id_rsa.
+	Your public key has been saved in /Users/your_user_directory/.ssh/id_rsa.pub.
+	The key fingerprint is:
+	*fingerprint值* your_email@example.com
+	The key's randomart image is:
+	+--[ RSA 2048]----+ 
+	|		略		  |
