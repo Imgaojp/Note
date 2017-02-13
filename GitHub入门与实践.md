@@ -214,3 +214,21 @@ id_rsa文件是私有密钥，id_rsa.pub是公开密钥。
 	$ git commit -m "Add index"
 	[master b79aa89]Add index
 		1 file changed, 1 insertion(+)
+### git branch----显示分支一览表
+&nbsp;&nbsp;&nbsp;&nbsp;在进行多个并行作业时，我们会用到分支。在这类并行开发中，往往同时存在多个最新代码状态。
+
+```flow
+st=>start: Start|past:>http://www.baidu.com
+e=>end:  Ende|future:>http://www.baidu.com
+op1=>operation:  My Operation
+op2=>operation:  Stuff|current
+sub1=>subroutine:  My Subroutine|invalid
+cond=>condition:  Yes or No|approved:>http://www.google.com
+c2=>condition:  Good idea|rejected
+io=>inputoutput:  catch something...|future
+st->op1(right)->cond
+cond(yes, right)->c2
+cond(no)->sub1(left)->op1
+c2(yes)->io->e
+c2(no)->op2->e  
+```
