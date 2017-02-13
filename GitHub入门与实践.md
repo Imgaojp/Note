@@ -101,4 +101,18 @@ id_rsa文件是私有密钥，id_rsa.pub是公开密钥。
 &nbsp;&nbsp;可以看到在Untracked files中显示了README.md文件。类似地，只要对Git的工作树或仓库进行操作，git status命令的显示结果就会发生变化。
 
 ### git add----向暂存区中添加文件
-&nbsp;&nbsp;&nbsp;&nbsp;如果只是用Git仓库的工作树创建了文件
+&nbsp;&nbsp;&nbsp;&nbsp;如果只是用Git仓库的工作树创建了文件。那么该文件并不会被记入Git仓库的版本管理对象中。因此我们用git status命令查看README.md文件时，它会显示在Untracked files里。
+
+&nbsp;&nbsp;&nbsp;&nbsp;要想让文件称为Git仓库的管理对象，就要用git add命令将其加入暂存区（Stage或者Index）中。暂存区是提交之前的一个临时区域。
+
+	$ git add README.md
+	$ git status
+	On branch master
+	
+	Initial commit
+	
+	Changes to be committed:
+		(use "git rm --cached <file>..." to unstage)
+
+			new file: README.md
+&nbsp;&nbsp;&nbsp;&nbsp;将README.md文件加入暂存区后，git status命令的显示结果发生了变化。可以看到，README.md显示在Changes to be committed中了。
