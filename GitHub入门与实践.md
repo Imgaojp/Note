@@ -207,4 +207,10 @@ id_rsa文件是私有密钥，id_rsa.pub是公开密钥。
 	+++ b/README.md
 	@@ -0,0 +1 @@
 	+# Git教程
-&nbsp;&nbsp;&nbsp;&nbsp;不妨养成这样的好习惯：在执行git commit命令之前先执行git diff HEAD命令，查看本次提交与上次提交之前
+&nbsp;&nbsp;&nbsp;&nbsp;不妨养成这样的好习惯：在执行git commit命令之前先执行git diff HEAD命令，查看本次提交与上次提交之前有什么差别，等确认完毕后再进行提交。这里的HEAD是指向当前分支中最新一次提交的指针。
+
+&nbsp;&nbsp;&nbsp;&nbsp;由于我们刚刚确定过两个提交之间的差别，所以直接运行git commit命令。
+
+	$ git commit -m "Add index"
+	[master b79aa89]Add index
+		1 file changed, 1 insertion(+)
