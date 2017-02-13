@@ -231,3 +231,21 @@ id_rsa文件是私有密钥，id_rsa.pub是公开密钥。
 	* master
 &nbsp;&nbsp;&nbsp;&nbsp;可以看到master分支左侧有“*”，表示这是当前所在的分支。也就是说正在master分支下进行开发。结果没有显示其他分支名，表示本地仓库中只存在master一个分支。
 ### git checkout -b----创建、切换分支
+&nbsp;&nbsp;&nbsp;&nbsp;如果想以当前的master分支为基础创建新的分支，我们需要用到git checkout -b命令。
+#### 切换到feature-A分支并进行提交
+&nbsp;&nbsp;&nbsp;&nbsp;执行下面的命令，创建名为feature-A的分支。
+
+	$ git checkout -b feature-A
+	Switched to a new branch 'feature-A'
+&nbsp;&nbsp;&nbsp;&nbsp;实际上，连续执行下面两条命令也可以达到同样的效果。
+
+	$ git branch feature-A
+	$ git checkout feature-A
+
+&nbsp;&nbsp;&nbsp;&nbsp;创建feature-A分支，并将当前分支切换为feature-A分支。再来查看分支列表：
+
+	$ git branch
+	* feature-A
+	  master
+
+&nbsp;&nbsp;&nbsp;&nbsp;feature-A分支左侧标有“*”，表示当前分支为feature-A。在这个状态下
