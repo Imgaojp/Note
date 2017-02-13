@@ -216,11 +216,13 @@ id_rsa文件是私有密钥，id_rsa.pub是公开密钥。
 		1 file changed, 1 insertion(+)
 ### git branch----显示分支一览表
 &nbsp;&nbsp;&nbsp;&nbsp;在进行多个并行作业时，我们会用到分支。在这类并行开发中，往往同时存在多个最新代码状态。如下图所示，从master分支创建feature-A分支和fix-B分支后，每个分支都有自己的最新代码。master分支是Git默认创建的分支，因此基本上所有开发都是以这个分支为中心进行的。
+
 ![](https://github.com/imgaojp/Note/raw/master/images/branch.jpg)
 
 &nbsp;&nbsp;&nbsp;&nbsp;不同分支中，可以同时进行完全不同的作业。等该分支的作业完成之后再与master分支合并。比如feature-A分支的作业结束后与master合并。如下图所示。
 
 &nbsp;&nbsp;&nbsp;&nbsp;通过灵活运用分支，可以让多个人同时进行并行开发。
+
 ![](https://github.com/imgaojp/Note/raw/master/images/branch-2.jpg)
 
 &nbsp;&nbsp;&nbsp;&nbsp;git branch命令可以将分支名列表显示，同时可以确认当前所在分支。
@@ -228,3 +230,4 @@ id_rsa文件是私有密钥，id_rsa.pub是公开密钥。
 	$ git branch
 	* master
 &nbsp;&nbsp;&nbsp;&nbsp;可以看到master分支左侧有“*”，表示这是当前所在的分支。也就是说正在master分支下进行开发。结果没有显示其他分支名，表示本地仓库中只存在master一个分支。
+### git checkout -b----创建、切换分支
