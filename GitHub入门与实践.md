@@ -99,3 +99,6 @@ id_rsa文件是私有密钥，id_rsa.pub是公开密钥。
 	nothing added to commit but untracked files present (use "git add" to track)
 
 &nbsp;&nbsp;可以看到在Untracked files中显示了README.md文件。类似地，只要对Git的工作树或仓库进行操作，git status命令的显示结果就会发生变化。
+
+### git add----向暂存区中添加文件
+&nbsp;&nbsp;&nbsp;&nbsp;如果只是用Git仓库的工作树创建了文件
