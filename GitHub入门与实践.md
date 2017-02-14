@@ -476,4 +476,138 @@ id_rsa文件是私有密钥，id_rsa.pub是公开密钥。
 
 ### 推送至远程仓库
 
-&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;Git是分散型版本管理系统，首先在GitHub上创建一个仓库。
+
+#### git remote add----添加远程仓库
+
+&nbsp;&nbsp;&nbsp;&nbsp;用git remote add命令将GitHub仓库设置为本地仓库的远程仓库。执行后，Git会自动将远程仓库的名称设置为origin（标识符）。
+	
+	$ git remote add origin git@github.com:imgaojp/git-tutorial.git
+
+### git push----推送至远程仓库
+#### 推送至master分支
+&nbsp;&nbsp;&nbsp;&nbsp;如果想将当前分支下本地仓库中的内容推送给远程仓库，需要用到git push命令。
+
+	$ git push -u origin master
+	Counting objects: 25, done.
+	Delta compression using up to 8 threads.
+	Compressing objects: 100% (13/13), done.
+	Writing objects: 100% (25/25), 2.01 KiB | 0 bytes/s, done.
+	Total 25 (delta 4), reused 0 (delta 0)
+	remote: Resolving deltas: 100% (4/4), done.
+	To git@github.com:imgaojp/git-tutorial.git
+	 * [new branch]      master -> master
+	Branch master set up to track remote branch master from origin.
+
+&nbsp;&nbsp;&nbsp;&nbsp;执行git push命令，当前分支的内容就会被推送给远程仓库origin的master分支。-u参数可以在推送的同时，将origin仓库的master分支设置为本地仓库当前分支的upstream（上游）。添加了这个参数，将来运行git pull命令从远程仓库获取内容时，本地仓库的这个分支就可以直接从origin的master分支获取内容，省去了另外添加参数的麻烦。
+
+&nbsp;&nbsp;&nbsp;&nbsp;执行该操作后，当前本地仓库master分支的内容将会被推送到GitHub的远程仓库中。在GitHub上也可以确定远程master分支的内容和本地master分支相同。
+
+#### 推送至master以外的分支
+
+&nbsp;&nbsp;&nbsp;&nbsp;除了master分支之外，远程仓库也可以创建其他分支。比如，在本地仓库创建feature-D分支，并将它以同名形式push给远程仓库。
+
+	$ git checkout -b feature-D
+	Switched to a new branch 'feature-D'
+
+&nbsp;&nbsp;&nbsp;&nbsp;我们在本地仓库中创建了feature-D分支，现在将它push给远程仓库并保持分支名称不变。
+
+	$ git push -u origin feature-D
+	Total 0 (delta 0), reused 0 (delta 0)
+	To git@github.com:imgaojp/git-tutorial.git
+	 * [new branch]      feature-D -> feature-D
+	Branch feature-D set up to track remote branch feature-D from origin.
+
+&nbsp;&nbsp;&nbsp;&nbsp;现在，在远程仓库的GitHub页面就可以查看到feature-D分支了。
+
+### git clone----获取远程仓库
+
+&nbsp;&nbsp;&nbsp;&nbsp;上一节我们把GitHub上创建的仓库设置为远程仓库，并向其push了feature-D分支。现在所有能够访问这个远程仓库的人都可以获取feature-D分支并加以修改。
+
+#### 获取远程仓库
+
+&nbsp;&nbsp;&nbsp;&nbsp;首先切换到其它目录，将GitHub上的仓库clone到本地。
+
+	$ git clone git@github.com:imgaojp/git-tutorial.git
+	Cloning into 'git-tutorial'...
+	remote: Counting objects: 25, done.
+	remote: Compressing objects: 100% (9/9), done.
+	remote: Total 25 (delta 4), reused 25 (delta 4), pack-reused 0
+	Receiving objects: 100% (25/25), done.
+	Resolving deltas: 100% (4/4), done.
+	Checking connectivity... done.
+
+&nbsp;&nbsp;&nbsp;&nbsp;执行git clone命令后我们会默认处于master分支下，同时系统会自动将origin设置为该远程仓库的标识符。也就是说，当前本地仓库的master分支与GitHub端远程仓库（origin）的master分支在内容上是完全相同的。
+
+	$ git branch -a
+	* master
+	  remotes/origin/HEAD -> origin/master
+	  remotes/origin/feature-C
+	  remotes/origin/feature-D
+	  remotes/origin/master
+
+&nbsp;&nbsp;&nbsp;&nbsp;用git branch -a命令查看当前分支的相关信息。添加-a参数可以同时显示本地仓库和远程仓库的分支信息。结果中显示了remotes/origin/feature-D，证明远程仓库已经有了feature-D分支。
+
+#### 获取远程的feature-D分支
+
+&nbsp;&nbsp;&nbsp;&nbsp;我们将feature-D分支获取至本地仓库。
+
+	$ git checkout -b feature-D origin/feature-D
+	Branch feature-D set up to track remote branch feature-D from origin.
+	Switched to a new branch 'feature-D'
+
+&nbsp;&nbsp;&nbsp;&nbsp;-b参数的后面是本地仓库中新建分支的名称。为了便于理解，我们仍将其命名为feature-D，让它与远程仓库的对应分支保持同名。新建分支名称后面是获取来源的分支名称。例子中指定了origin/feature-D，就是说以名为origin的仓库（GitHub端的仓库）的feature-D分支为来源，在本地创建feature-D分支。
+
+#### 向本地的feature-D分支提交更改
+
+&nbsp;&nbsp;&nbsp;&nbsp;现在假定我们是另外一个开发者，要做一个新的提交。在README.md文件中添加一行文字，然后提交。
+
+	$ git diff
+	diff --git a/README.md b/README.md
+	index eb39065..ba08c5d 100644
+	--- a/README.md
+	+++ b/README.md
+	@@ -1,4 +1,5 @@
+	 # Git教程
+	   - feature-A
+	   - fix-B
+	-  - feature-C
+	\ No newline at end of file
+	+  - feature-C
+	+  - feature-D
+	\ No newline at end of file
+	
+	$ git commit -am "Add feature-D"
+	[feature-D 5806c92] Add feature-D
+	 1 file changed, 2 insertions(+), 1 deletion(-)
+
+#### 推送feature-D分支
+&nbsp;&nbsp;&nbsp;&nbsp;从远程仓库获取feature-D分支，在本地仓库中提交更改，再将feature-D分支推送回远程仓库，通过这一系列操作，就可以与其他开发者相互合作，共同培育feature-D分支，实现某些功能。
+
+	$ git push
+	Counting objects: 3, done.
+	Delta compression using up to 8 threads.
+	Compressing objects: 100% (2/2), done.
+	Writing objects: 100% (3/3), 279 bytes | 0 bytes/s, done.
+	Total 3 (delta 0), reused 0 (delta 0)
+	To git@github.com:imgaojp/git-tutorial.git
+	   af91fec..5806c92  feature-D -> feature-D
+
+### git pull----获取最新的远程仓库分支
+
+&nbsp;&nbsp;&nbsp;&nbsp;现在回到原来的目录，这边的本地仓库只创建了feature-D分支，并没有在feature-D中进行任何提交。然而远程仓库的feature-D分支中已经有了刚刚推送的提交。这时可以用git pull命令，将本地的feature-D分支更新到最新的状态。当前分支为feature-D分支。
+	
+	$ git pull origin feature-D
+	remote: Counting objects: 3, done.
+	remote: Compressing objects: 100% (2/2), done.
+	remote: Total 3 (delta 0), reused 3 (delta 0), pack-reused 0
+	Unpacking objects: 100% (3/3), done.
+	From github.com:imgaojp/git-tutorial
+	 * branch            feature-D  -> FETCH_HEAD
+	   af91fec..5806c92  feature-D  -> origin/feature-D
+	Updating af91fec..5806c92
+	Fast-forward
+	 README.md | 3 ++-
+	 1 file changed, 2 insertions(+), 1 deletion(-)
+
+&nbsp;&nbsp;&nbsp;&nbsp;GitHub端远程仓库中的feature-D分支是最新状态，所以本地仓库中的feature-D分支就得到了更新。如果两人同时修改了同一部分的源代码，push时很容易发生冲突。所以多名开发者在同一个分支中进行作业时，为减少冲突情况的发生，建议更频繁的进行push和pull操作。
