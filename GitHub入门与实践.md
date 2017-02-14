@@ -610,4 +610,3 @@ id_rsa文件是私有密钥，id_rsa.pub是公开密钥。
 	 README.md | 3 ++-
 	 1 file changed, 2 insertions(+), 1 deletion(-)
 
-&nbsp;&nbsp;&nbsp;&nbsp;GitHub端远程仓库中的feature-D分支是最新状态，所以本地仓库中的feature-D分支就得到了更新。如果两人同时修改了同一部分的源代码，push时很容易发生冲突。所以多名开发者在同一个分支中进行作业时，为减少冲突情况的发生，建议更频繁的进行push和pull操作。
