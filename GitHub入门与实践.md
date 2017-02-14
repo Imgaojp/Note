@@ -389,3 +389,91 @@ id_rsa文件是私有密钥，id_rsa.pub是公开密钥。
 
 &nbsp;&nbsp;&nbsp;&nbsp;=======以上的部分就是当前HEAD的内容，以下的部分是要合并的fix-B分之中的内容。我们在编辑器中将其改为想要的样子。
 
+	# Git教程 
+	  - feature-A
+	  - fix-B
+
+&nbsp;&nbsp;&nbsp;&nbsp;本次修正让feature-A与fix-B的内容并存于文件之中。但是在实际开发中，往往需要删除其中之一，所以务必仔细分析冲突部分的内容后再修改。
+
+#### 提交解决后的结果
+
+&nbsp;&nbsp;&nbsp;&nbsp;冲突解决后，执行git add命令与git commit命令。
+
+	$ git add README.md
+	
+	$ git commit -m "Fix conflict"
+	[master 31b43ba] Fix conflict
+
+### git commit --amend----修改提交信息
+
+&nbsp;&nbsp;&nbsp;&nbsp;我们将上一条提交信息记为了“Fix conflict”，但是它其实是fix-B分支的合并，解决合并时发生的冲突只是过程之一，这样标记不妥。我们修改这一条信息。
+
+	$ git commit --amend
+
+### git rebase -i----压缩历史
+
+&nbsp;&nbsp;&nbsp;&nbsp;合并特性分支前，如果发现已提交的内容中有拼写错误等，不妨提交一个修改，然后将这个修改包含到前一个提交之中，压缩为一个历史记录。
+
+#### 创建feature-C分支
+
+&nbsp;&nbsp;&nbsp;&nbsp;首先创建feature-C特性分支。
+	
+	$ git checkout -b feature-C
+	Switched to a new branch 'feature-C'
+
+&nbsp;&nbsp;&nbsp;&nbsp;作为feature-C的功能实现，我们在README.md中添加一行文字，并故意留下拼写错误。然后提交这部分内容，用git commit -am命令来一次完成git add和git commit这两步操作。
+
+	$ git commit -am "Add "
+	[feature-C a6dbae8] Add
+	 1 file changed, 1 insertion(+)
+
+#### 修正拼写错误
+&nbsp;&nbsp;&nbsp;&nbsp;修正README.md文件的内容，修正后的差别如下所示。
+
+	$ git diff
+	diff --git a/README.md b/README.md
+	index c6574df..eb39065 100644
+	--- a/README.md
+	+++ b/README.md
+	@@ -1,4 +1,4 @@
+	 # Git教程
+	   - feature-A
+	   - fix-B
+	-  - faeture-C
+	\ No newline at end of file
+	+  - feature-C
+	\ No newline at end of file
+
+&nbsp;&nbsp;&nbsp;&nbsp;然后进行提交。
+
+	$ git commit -am "Fix typo"
+	[feature-C 2fa40fa] Fix typo
+	 1 file changed, 1 insertion(+), 1 deletion(-)
+
+&nbsp;&nbsp;&nbsp;&nbsp;实际上，我们不希望在历史记录中看到这类提交，因为健全的历史记录并不需要它们。
+
+#### 更改历史
+
+&nbsp;&nbsp;&nbsp;&nbsp;因此，我们来更改历史。将“Fix typo”修正的内容与之前一次的提交合并，在历史记录中合并为一次完美的提交。为此，我们要用到git rebase命令。
+
+	$ git rebase -i HEAD~2
+
+&nbsp;&nbsp;&nbsp;&nbsp;用上述方式执行git rebase命令，可以选定当前分支中包含HEAD（最新提交）在内的两个最新历史记录为对象，并在编辑器中打开。编辑后退出编辑器，再查看日志时发现已经更改。
+
+#### 合并至master分支
+
+&nbsp;&nbsp;&nbsp;&nbsp;feature-C分支的使命告一段落，将其与master分支合并。
+	
+	$ git checkout master
+	Switched to branch 'master'
+	
+	$ git merge --no-f feature-C
+	Merge made by the 'recursive' strategy.
+	 README.md | 1 +
+	 1 file changed, 1 insertion(+)
+
+&nbsp;&nbsp;&nbsp;&nbsp;master分支整合了feature-C分支。
+
+### 推送至远程仓库
+
+&nbsp;&nbsp;&nbsp;&nbsp;
