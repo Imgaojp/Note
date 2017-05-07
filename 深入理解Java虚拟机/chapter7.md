@@ -16,3 +16,17 @@
 - 当使用JDK1.7的动态语言支持时，如果一个java.lang.invoke.MethodHandle实例最后的解析结果REF_getStatic、REF_putStatic、REF_invokeStatic的方法句柄，并且这个方法句柄对应的类没有初始化时。
 
 ## 类加载的过程
+
+### 加载
+“加载”是“类加载”（Class Loading）过程的一个阶段。在加载过程中，虚拟机完成以下任务：
+- 通过一个类的全限定名来获取定义此类的二进制字节流
+- 将这个字节流所代表的静态存储结构转化为方法区的运行时数据结构
+- 在内存中生成一个代表这个类的java.lang.Class对象，作为方法区这个类的各种数据访问入口
+
+获取一个类的二进制字节流可以通过诸多手段：
+1. 从ZIP包读取，成为JAR、EAR、WAR格式的基础
+2. 从网络中获取，典型应用是Applet
+3. 运行时计算机生成，比如动态代理技术，在java.lang.reflect.Proxy中就是用了ProxyGenerator.generateProxyClass来为特定接口生成形式为“$Proxy”的代理类的二进制字节流
+4. 从其他文件生成，比如JSP文件生成对应的Class类
+5. 从数据库中读取
+
